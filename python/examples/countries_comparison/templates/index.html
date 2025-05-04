@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Country comparison</title>
+     <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
+  </head>
+  <body>
+    <div id="image-container">
+    </div>
+    <select 
+        name="first-country"
+        id="country-dropdown"
+        hx-post="/country-changed"
+        hx-target="#first-country" 
+        hx-swap="innerHTML"
+        hx-include="#second-country-dropdown"
+    >
+        <option disabled selected value="">-- Select a Country --</option>
+        {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+        {% endfor %}
+    </select>
+    <select 
+        name="second-country" 
+        id="second-country-dropdown"
+        hx-post="/country-changed"
+        hx-target="#second-country" 
+        hx-swap="innerHTML"
+        hx-include="#country-dropdown"
+    >
+        <option disabled selected value="">-- Select a Country --</option>
+        {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+        {% endfor %}
+    </select>
+    <div id="first-country">
+    </div>
+    <div id="second-country">
+    </div>
+   </body>
+</html>

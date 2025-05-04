@@ -1,0 +1,35 @@
+[project]
+name = "countries-comparison"
+version = "0.1.0"
+
+dependencies = [
+    "flask",
+    "tradingeconomics",
+    "pandas",
+    "matplotlib",
+    "plotly"
+]
+
+[project.optional-dependencies]
+dev = [
+    "flake8-pyproject==1.2.3",
+    "black==24.4.2",
+    "mypy==1.10.0",
+    "isort==5.13.2",
+    "types-requests",
+]
+
+[tool.flake8]
+ignore = ['E203', 'W503']
+max-line-length = 120
+count = true
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+
+[tool.setuptools]
+zip-safe = false
+py-modules = []
