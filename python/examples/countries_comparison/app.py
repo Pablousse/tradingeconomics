@@ -45,7 +45,12 @@ def get_plot(country: str, second_country: str = ""):
         df = pd.concat([df, df_second_country], ignore_index=True)
 
     # Plotting the data
-    fig = px.line(df, x="DateTime", y="Value", color="Country")
+    fig = px.line(df, x="DateTime", y="Value", color="Country", 
+                  labels={
+                     "Value": "Interest rate (%)",
+                     "DateTime": "Date",
+                     "Country": "Countries"
+                 })
     html_plot = fig.to_html(full_html=False)
 
     return html_plot
@@ -124,6 +129,7 @@ def country_changed():
     table = get_country_table(selected_country)
 
     html = f"""{table}
+    <h2 id="plot-title" hx-swap-oob="true">Interest rate of countries</h2>
     <div id="image-container" hx-swap-oob="true">{html_plot}</div>"""
 
     return html
