@@ -75,13 +75,16 @@ def get_country_table(country: str):
         country: string.
     """
 
-    html = """<table>
-    <tr>
-        <th>Category</th>
-        <th>Previous Value</th>
-        <th>Latest Value</th>
-        <th>Difference</th>
-    </tr>
+    html = """<table class='table'>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Previous Value</th>
+            <th>Latest Value</th>
+            <th>Difference</th>
+        </tr>
+    </thead>
+    <tbody>
     """
     data = get_country_data(country)
     for category in CATEGORIES:
@@ -90,13 +93,14 @@ def get_country_table(country: str):
         if category in data:
             html += f"<td>{data[category]["PreviousValue"]}</td>"
             html += f"<td>{data[category]["LatestValue"]}</td>"
-            html += f"<td>{data[category]["LatestValue"] - data[category]["PreviousValue"]}</td>"
+            html += f"<td>{round(data[category]["LatestValue"] - data[category]["PreviousValue"],2)}</td>"
         else:
             html += "<td>No value</td><td>No value</td><td>No value</td>"
 
         html += "</tr>"
 
-    html += "</table>"
+    html += """</tbody>
+    </table>"""
     return html
 
 
